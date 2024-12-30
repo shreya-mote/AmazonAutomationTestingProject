@@ -7,7 +7,7 @@ import com.testingShastra.pages.LoginPage;
 import com.testingShastra.Base.TestBase;
 import com.testingShastra.pages.HomePage;
 
-public class POMAmzonTC extends TestBase{
+public class LoginPage_TestCases extends TestBase{
 	@Test
 	public  void userEnterBlankEmail() {
 		HomePage hp=new HomePage();

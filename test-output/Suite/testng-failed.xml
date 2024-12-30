@@ -3,13 +3,19 @@
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="AmazonTestCases.POM_AddToCart">
+      <class name="AmazonTestCases.ShoppingCartPage_TestCases">
         <methods>
-          <include name="testCase_VerifyIsProductAddedToCartOrNot"/>
+          <include name="verifyClickOnAddtoShoppingListThenProductIsAddedToShoppingList"/>
+          <include name="verifyUserDeleteOneProductFromCartDeleteMessageShouldBeDisplay"/>
+          <include name="verifyProductQuantityDecreasesWhenSubtractSignIsClicked"/>
+          <include name="x1"/>
           <include name="setup"/>
-          <include name="isQntityIsDecreasedAfterRemovingPrdct"/>
+          <include name="verifyProductQuantityIncreasesWhenPlusSignIsClicked"/>
+          <include name="verifyUserClickOnAddedToShoppingListShoppingListIsDisplay"/>
+          <include name="tearDown"/>
+          <include name="loginAmazon"/>
         </methods>
-      </class> <!-- AmazonTestCases.POM_AddToCart -->
+      </class> <!-- AmazonTestCases.ShoppingCartPage_TestCases -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

@@ -1,22 +1,21 @@
-package com.testingShastra.Base;
+package com.testingShastra.stepdefinations;
 
-import java.util.Properties;
-
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 
+import com.testingShastra.Base.Keyword;
 import com.testingShastra.utils.PropertiesFile;
 
-public class TestBase  {
-	@BeforeMethod
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+
+public class Hooks {
+	@Before
 	public void setup() {
 		Keyword.openBrowser(PropertiesFile.getBrowser());
 		Keyword.launchUrl(PropertiesFile.getUrl("qa"));
 		Keyword.driver.manage().window().maximize();
 	}
-	@AfterMethod
+	@After
 	public void tearDown() {
 		Keyword.driver.quit();
 	}

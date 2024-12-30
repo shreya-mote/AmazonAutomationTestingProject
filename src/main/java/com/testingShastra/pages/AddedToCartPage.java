@@ -7,14 +7,13 @@ import org.openqa.selenium.support.PageFactory;
 import com.testingShastra.Base.Keyword;
 import com.testingShastra.utils.waitsFor;
 
-public class AddToCart {
+public class AddedToCartPage {
 
-	public AddToCart() {
+	public AddedToCartPage() {
 		PageFactory.initElements(Keyword.driver, this);
 	}
 
-	@FindBy(id = "add-to-cart-button")
-	private static WebElement addToCartButton;
+	
 
 	@FindBy(xpath = "//h1[@class='a-size-medium-plus a-color-base sw-atc-text a-text-bold']")
 	private static WebElement messageofProductadded;
@@ -27,10 +26,7 @@ public class AddToCart {
 	@FindBy(css="span[data-a-selector=\"value\"]")
 	private static WebElement getOnePrdctQty;
 	
-	@FindBy(css="span.a-icon.a-icon-small-add")
-	private static WebElement increaseQty;
-	@FindBy(css="span.a-icon.a-icon-small-remove")
-	private static WebElement decreaseQty;
+	
 	
 	@FindBy(css="span[data-a-selector=\"value\"]")
 	private static WebElement afterAddingPrdct;
@@ -42,41 +38,30 @@ public class AddToCart {
 		Keyword.scrollwindow(sizeDropDown);
 		Keyword.handleDropDown(sizeDropDown);
 	}
-	public static void clickOnAddToCartButton() {
-		waitsFor.VisibilityOfElemntMethod(addToCartButton);
-		Keyword.scrollwindow(addToCartButton);
-
-	}
-	public static boolean displayIsItemAddedToCart() {
-		waitsFor.VisibilityOfElemntMethod(messageofProductadded);
+	
+	public  boolean displayIsItemAddedToCart() {
+		waitsFor.visiblityOfElement(messageofProductadded);
 		return Keyword.isMessageDisplayed(messageofProductadded);
 
 	}
-	public static boolean isButtnAddToCartDisplay() {
-		waitsFor.VisibilityOfElemntMethod(addToCartButton);
-		return Keyword.isMessageDisplayed(addToCartButton);
-	}
-	public static void clickOnGotoCartBttn() {
-		waitsFor.VisibilityOfElemntMethod(goToCartBttn);
+	
+	public  void clickOnGotoCartBttn() {
+		waitsFor.visiblityOfElement(goToCartBttn);
 		Keyword.clickOn(goToCartBttn);
 	}
-	public static int getQtyOfProductBefore() {
+	public  int getQtyOfProductBefore() {
 		String singlePrdctQty= Keyword.getText(getOnePrdctQty);
 		return Keyword.getIntValueFromStringFormat(singlePrdctQty);
 	}
-	public static void clickOnIncreaseQtyOfPrdct() {
-		Keyword.clickOn(increaseQty);
-	}
-	public static void clickOnDecreaseQtyOfPrdct() {
-		Keyword.clickOn(decreaseQty);
-	}
-	public static int QtyOfPrdctAfterAction() {
-		waitsFor.VisibilityOfElemntMethod(afterAddingPrdct);
+	
+	
+	public  int QtyOfPrdctAfterAction() {
+		waitsFor.visiblityOfElement(afterAddingPrdct);
 		String incrseqtyPrdct= Keyword.getText(afterAddingPrdct);
 		return Keyword.getIntValueFromStringFormat(incrseqtyPrdct);
 	}
-	public static int getQntyofSubtotal() {
-		waitsFor.VisibilityOfElemntMethod(itemSubtotal);
+	public int getQntyofSubtotal() {
+		waitsFor.visiblityOfElement(itemSubtotal);
 		String subtotalQtyPrdct= Keyword.getText(itemSubtotal);
 		return Keyword.getIntValueFromStringFormat(subtotalQtyPrdct);
 	}
