@@ -49,12 +49,12 @@ public class AddToCart {
 	}
 	public static boolean displayIsItemAddedToCart() {
 		waitsFor.VisibilityOfElemntMethod(messageofProductadded);
-		return Keyword.isMessageDisplayed(messageofProductadded);
+		return Keyword.isDisplayed(messageofProductadded);
 
 	}
 	public static boolean isButtnAddToCartDisplay() {
 		waitsFor.VisibilityOfElemntMethod(addToCartButton);
-		return Keyword.isMessageDisplayed(addToCartButton);
+		return Keyword.isDisplayed(addToCartButton);
 	}
 	public static void clickOnGotoCartBttn() {
 		waitsFor.VisibilityOfElemntMethod(goToCartBttn);
