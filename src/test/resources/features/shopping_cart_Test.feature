@@ -32,7 +32,7 @@ When user added one product in cart and check the Quntity
 And Also added Same product second time 
 Then verify Quntity is increase after adding same product
 
-Scenario: To verify  After adding product i cart product details in the cart is same as product display page  
+Scenario: To verify After adding product into cart product details in the cart is same as product display page  
 Given User should Login
 When check Product details Before adding product in the shopping cart 
 Then Check product details After adding shopping cart

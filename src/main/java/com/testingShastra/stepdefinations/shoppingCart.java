@@ -1,5 +1,6 @@
 package com.testingShastra.stepdefinations;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.Keys;
 import org.testng.Assert;
 
@@ -18,7 +19,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class shoppingCart {
-
+	private static final Logger log = Logger.getLogger(shoppingCart.class);
 	int expectedQtyIncrease;
 	int expectedQtydecrease;
 	int expectedsubtotal;
@@ -28,14 +29,14 @@ public class shoppingCart {
 	String titleBeforClick = null;
 	String beforClick = null;
 	String beforTitle = null;
-	String titleBeforClickOndelete=null;
+	String titleBeforClickOndelete = null;
 
 	@Given("User should Login")
 	public void openBrowserAndLaunchUrlAndUserLOgin() {
 		HomePage hp = new HomePage();
 		hp.ClickOnSigin();
 		LoginPage loginpage = new LoginPage();
-		loginpage.EnterUserName(PropertiesFile.getUserName());
+		loginpage.enterPhoneNumber(PropertiesFile.getUserName());
 		loginpage.clickOnContinue();
 		loginpage.enterPassWord(PropertiesFile.getPassword());
 		loginpage.clickOnSigninButton();
@@ -65,7 +66,7 @@ public class shoppingCart {
 		AddedToCartPage addtocart = new AddedToCartPage();
 		boolean statusOfproductcart = addtocart.displayIsItemAddedToCart();
 		Assert.assertTrue(statusOfproductcart, "Product is not added to cart");
-		System.out.println("product is succesfully added to cart ");
+		log.info("product is succesfully added to cart ");
 
 	}
 
@@ -86,7 +87,7 @@ public class shoppingCart {
 		addcart.clickOnGotoCartBttn();
 		int QuntityOfPrdctBefor = shoppingCart.getQuntityOfSameProduct();
 		expectedQtyIncrease = QuntityOfPrdctBefor + 1;
-		System.out.println("expectedQtyIncrease" + QuntityOfPrdctBefor);
+		log.info("expectedQtyIncrease" + QuntityOfPrdctBefor);
 		shoppingCart.clickOnPlusSign();
 	}
 
@@ -94,9 +95,9 @@ public class shoppingCart {
 	public void verifyIncreaseQuntity() {
 		ShoppingCartPage shoppingCart = new ShoppingCartPage();
 		int QuntityOfPrdctAfter = shoppingCart.getQuntityOfSameProduct();
-		System.out.println("afterIncreasingPrdctQty" + QuntityOfPrdctAfter);
+		log.info("afterIncreasingPrdctQty" + QuntityOfPrdctAfter);
 		Assert.assertEquals(expectedQtyIncrease, QuntityOfPrdctAfter, "quantity not increased");
-		System.out.println("quantity of of product is increased ");
+		log.info("quantity of product is increased after click on plus sign");
 	}
 
 	@And("Go to cart and check quntity befor and click on subtract sign")
@@ -114,9 +115,9 @@ public class shoppingCart {
 	public void verifyDecreaseQuntity() {
 		ShoppingCartPage shoppingCart = new ShoppingCartPage();
 		int QuntityOfPrdctAfter = shoppingCart.getQuntityOfSameProduct();
-		System.out.println("afterIncreasingPrdctQty" + QuntityOfPrdctAfter);
+		log.info("afterIncreasingPrdctQty" + QuntityOfPrdctAfter);
 		Assert.assertEquals(QuntityOfPrdctAfter, expectedQtydecrease);
-		System.out.println("quantity of of product is decreased ");
+		log.info("quantity of of product is decreased After click on subtract sign");
 
 	}
 
@@ -134,7 +135,7 @@ public class shoppingCart {
 		displayProduct.clickOnAddToCart();
 		addcart.clickOnGotoCartBttn();
 		int subtotalbefor = shoppingcart.getSubTotalOfIterm();
-		System.out.println(subtotalbefor);
+		log.info(subtotalbefor);
 		expectedsubtotal = subtotalbefor + 1;
 
 	}
@@ -157,8 +158,9 @@ public class shoppingCart {
 		ShoppingCartPage shoppingcart = new ShoppingCartPage();
 		addcart.clickOnGotoCartBttn();
 		int actualsubtotalAfterAdded = shoppingcart.getSubTotalOfIterm();
-		System.out.println(actualsubtotalAfterAdded);
+		log.info(actualsubtotalAfterAdded);
 		Assert.assertEquals(actualsubtotalAfterAdded, expectedsubtotal);
+		log.info("subTotal is Increase when adding second product in cart");
 
 	}
 
@@ -199,6 +201,7 @@ public class shoppingCart {
 		ShoppingCartPage shoppingcart = new ShoppingCartPage();
 		int actualQuntityIncrease = shoppingcart.getQuntityOfSameProduct();
 		Assert.assertEquals(actualQuntityIncrease, expectedQtyIncrease);
+		log.info("Quntity Of product is increase after adding same product ");
 
 	}
 
@@ -213,14 +216,14 @@ public class shoppingCart {
 		productpage.clickTshirtTurms();
 		productpage.switchToanotherWindow(PropertiesFile.switchTotshirtturmsWindowUrl());
 		productNameOnDisplayPage = displayProduct.getNameOfProduct();
-		System.out.println(productNameOnDisplayPage);
+		log.info(productNameOnDisplayPage);
 		priceOndisplayPage = displayProduct.getpriceOfProduct();
-		System.out.println(priceOndisplayPage);
+		log.info(priceOndisplayPage);
 
 	}
 
 	@Then("Check product details After adding shopping cart")
-	private void productDetailsAfterAddingCart() {
+	public void productDetailsAfterAddingCart() {
 		AllProductsPage productpage = new AllProductsPage();
 		Product_displayPage displayProduct = new Product_displayPage();
 		AddedToCartPage addcart = new AddedToCartPage();
@@ -228,9 +231,9 @@ public class shoppingCart {
 		displayProduct.clickOnAddToCart();
 		addcart.clickOnGotoCartBttn();
 		String productNameOnShoppingcartPage = shoppingcart.getNameOfProduct();
-		System.out.println(productNameOnShoppingcartPage);
+		log.info(productNameOnShoppingcartPage);
 		String priceOnShoppingCartPage = shoppingcart.getpriceOfProduct();
-		System.out.println(priceOnShoppingCartPage);
+		log.info(priceOnShoppingCartPage);
 		if (productNameOnShoppingcartPage.contentEquals(productNameOnDisplayPage)
 				&& priceOndisplayPage == priceOnShoppingCartPage) {
 			Assert.assertTrue(true);
@@ -245,7 +248,7 @@ public class shoppingCart {
 		ShoppingCartPage shoppingcart = new ShoppingCartPage();
 		homepage.goToshoppingCart();
 		NameOfProductBeforRefresh = shoppingcart.getNameOfProduct();
-		System.out.println(NameOfProductBeforRefresh);
+		log.info(NameOfProductBeforRefresh);
 		Keyword.refreshPage();
 	}
 
@@ -253,7 +256,7 @@ public class shoppingCart {
 	public void afterRefresh() {
 		ShoppingCartPage shoppingcart = new ShoppingCartPage();
 		String NameOfProductAfterRefresh = shoppingcart.getNameOfProduct();
-		System.out.println(NameOfProductAfterRefresh);
+		log.info(NameOfProductAfterRefresh);
 		if (NameOfProductBeforRefresh.contentEquals(NameOfProductAfterRefresh)) {
 			Assert.assertTrue(true);
 		}
@@ -273,8 +276,9 @@ public class shoppingCart {
 		ShoppingCartPage shoppingcart = new ShoppingCartPage();
 		String AfterDeselectExpectedMsg = "No items selected";
 		String AfterDeselectActualMsg = shoppingcart.getItermsSelectMsg();
-		System.out.println(AfterDeselectActualMsg);
+		log.info(AfterDeselectActualMsg);
 		Assert.assertEquals(AfterDeselectActualMsg, AfterDeselectExpectedMsg);
+		log.info(AfterDeselectActualMsg);
 
 	}
 
@@ -292,27 +296,27 @@ public class shoppingCart {
 		ShoppingCartPage shoppingcart = new ShoppingCartPage();
 		boolean selectItermsStatus = shoppingcart.selectedProductCountIsDisplay();
 		Assert.assertTrue(selectItermsStatus);
-		System.out.println(shoppingcart.getItermsSelectMsg());
+		log.info(shoppingcart.getItermsSelectMsg());
 
 	}
 
 	@When("user go to shopping cart and click on product")
-	private void clickproductInshoppingcart() {
+	public void clickproductInshoppingcart() {
 		HomePage homepage = new HomePage();
 		ShoppingCartPage shoppingcart = new ShoppingCartPage();
 		homepage.goToshoppingCart();
 		titleBeforClick = shoppingcart.getTitleOfPage();
-		System.out.println(titleBeforClick);
+		log.info(titleBeforClick);
 		shoppingcart.clickOnproduct();
 		Keyword.refreshPage();
 	}
 
 	@Then("verify user redirect to these product details page")
-	private void redirectToProductDesplayPage() {
+	public void redirectToProductDesplayPage() {
 		ShoppingCartPage shoppingcart = new ShoppingCartPage();
 		shoppingcart.switchwindow(PropertiesFile.switchToproductTitlewindow());
 		String titleAfterClick = shoppingcart.getTitleOfPage();
-		System.out.println(titleAfterClick);
+		log.info(titleAfterClick);
 		if (!titleBeforClick.equals(titleAfterClick)) {
 			Assert.assertTrue(true);
 		}
@@ -352,6 +356,7 @@ public class shoppingCart {
 		String expectedDisplays = "More items like this";
 		String actual = shoppingcart.getnameMoreLikeThese();
 		Assert.assertEquals(actual, expectedDisplays);
+		log.info("More items like this");
 	}
 
 	@When("user go to the cart and click on share")
@@ -376,7 +381,7 @@ public class shoppingCart {
 		ShoppingCartPage shoppingcart = new ShoppingCartPage();
 		homepage.goToshoppingCart();
 		beforClick = shoppingcart.productInsavetoLater();
-		System.out.println(beforClick);
+		log.info(beforClick);
 		shoppingcart.clickonsaveToLater();
 
 	}
@@ -385,7 +390,7 @@ public class shoppingCart {
 	public void moveToSaveTOLater() {
 		ShoppingCartPage shoppingcart = new ShoppingCartPage();
 		String afterclick = shoppingcart.productInsavetoLater();
-		System.out.println(afterclick);
+		log.info(afterclick);
 		if (!beforClick.contentEquals(afterclick)) {
 			Assert.assertTrue(true);
 		}
@@ -402,7 +407,7 @@ public class shoppingCart {
 	}
 
 	@Then("Product Is Added To Shopping List message is display")
-	private void addToShoppingListMsg() {
+	public void addToShoppingListMsg() {
 		ShoppingCartPage shoppingcart = new ShoppingCartPage();
 		boolean status = shoppingcart.addedToShoppingListMsg();
 		Assert.assertTrue(status);
@@ -424,6 +429,7 @@ public class shoppingCart {
 		ShoppingCartPage shoppingcart = new ShoppingCartPage();
 		boolean shoppingListDisplay = shoppingcart.shoppingListDisplay();
 		Assert.assertTrue(shoppingListDisplay);
+		log.info("shopping list page is open");
 	}
 
 	@When("User go to cart and Click On Proceed To By")
@@ -445,6 +451,7 @@ public class shoppingCart {
 		}
 
 		Keyword.backPage();
+		log.info("checkOut page is Open");
 	}
 
 	@When("User go to cart and click on delete")
@@ -461,16 +468,17 @@ public class shoppingCart {
 		boolean deletemsgIsDisplay = shoppingcart.succesfullyDeleteMsgIsDisplay();
 		Assert.assertTrue(deletemsgIsDisplay);
 	}
-	
+
 	@When("user go to cart and click delete product message")
 	public void clickOndeleteMessage() {
 		HomePage homepage = new HomePage();
 		ShoppingCartPage shoppingcart = new ShoppingCartPage();
 		homepage.goToshoppingCart();
 		shoppingcart.deleteOneProduct();
-		 titleBeforClickOndelete = shoppingcart.getTitleOfPage();
+		titleBeforClickOndelete = shoppingcart.getTitleOfPage();
 		shoppingcart.clickondeleteProduct();
 	}
+
 	@Then("verify delete product page is open")
 	public void deleteproductPage() {
 		ShoppingCartPage shoppingcart = new ShoppingCartPage();
@@ -482,7 +490,7 @@ public class shoppingCart {
 		}
 
 	}
-	
+
 	@When("user go to cart and delete all product in cart")
 	public void deleteAllProduct() {
 		HomePage homepage = new HomePage();
@@ -491,11 +499,12 @@ public class shoppingCart {
 		try {
 			shoppingcart.deleteproductFromCart();
 		} catch (InterruptedException e) {
-			
+
 			e.printStackTrace();
 		}
 
 	}
+
 	@Then("cart is empty message is display")
 	public void emptyMsg() {
 		ShoppingCartPage shoppingcart = new ShoppingCartPage();

@@ -3,15 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="AmazonTestCases.ShoppingCartPage_TestCases">
+      <class name="com.testingshashtra.runner.FeatureRunner">
         <methods>
-          <include name="verifyIsProductAddedToCartOrNot"/>
-          <include name="x1"/>
-          <include name="setup"/>
-          <include name="tearDown"/>
-          <include name="loginAmazon"/>
+          <include name="setUpClass"/>
+          <include name="runScenario" invocation-numbers="32 33 34 3 35 22 23 24 25 30 31"/>
+          <include name="tearDownClass"/>
         </methods>
-      </class> <!-- AmazonTestCases.ShoppingCartPage_TestCases -->
+      </class> <!-- com.testingshashtra.runner.FeatureRunner -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

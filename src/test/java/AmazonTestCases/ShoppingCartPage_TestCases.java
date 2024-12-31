@@ -26,7 +26,7 @@ public class ShoppingCartPage_TestCases extends TestBase {
 		HomePage hp = new HomePage();
 		hp.ClickOnSigin();
 		LoginPage loginpage = new LoginPage();
-		loginpage.EnterUserName(PropertiesFile.getUserName());
+		loginpage.enterPhoneNumber(PropertiesFile.getUserName());
 		loginpage.clickOnContinue();
 		loginpage.enterPassWord(PropertiesFile.getPassword());
 		loginpage.clickOnSigninButton();

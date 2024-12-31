@@ -52,13 +52,13 @@ public class ShoppingCartPage {
 	@FindBy(css = "span.a-size-medium.sc-number-of-items")
 	private static WebElement selectItermsMsg;
 
-	@FindBy(css = "input[aria-label=\"Save for later TURMS Anti Stain Anti Odor Polo T Shirt for Men | Water Repellent | Stretchable T Shirt for Boys | Regular fit |Breathable Cotton | Half Sleeve | Casual Sports Wear for Men Pink\"]")
+	@FindBy(css = "input[data-feature-id=\"save-for-later-action\"]")
 	private static WebElement saveToLater;
 
 	@FindBy(css = "div#sc-saved-cart-list-caption-text")
 	private static WebElement addedInsaveToLater;
 
-	@FindBy(css = "input[aria-label=\"See more like this TURMS Anti Stain Anti Odor Polo T Shirt for Men | Water Repellent | Stretchable T Shirt for Boys | Regular fit |Breathable Cotton | Half Sleeve | Casual Sports Wear for Men Pink\"]")
+	@FindBy(css = "input[value=\"See more like this\"]")
 	private static WebElement seemorelikeThese;
 
 	@FindBy(css = "h1.a-size-large")

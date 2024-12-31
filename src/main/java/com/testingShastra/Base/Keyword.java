@@ -1,5 +1,6 @@
 package com.testingShastra.Base;
 
+import java.awt.Desktop.Action;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,6 +20,7 @@ import Exception.InvalidDriverException;
 
 public abstract class Keyword {
 	public static RemoteWebDriver driver;
+
 	static JavascriptExecutor js;
 
 	public static void openBrowser(String browserName) {
@@ -42,6 +44,7 @@ public abstract class Keyword {
 		element.click();
 	}
 
+
 	public static boolean isMessageDisplayed(WebElement element) {
 		return element.isDisplayed();
 	}
@@ -50,7 +53,12 @@ public abstract class Keyword {
 		return element.isEnabled();
 	}
 
-	public String emailInput(String email) {
+	
+	public static boolean isDisplayed(WebElement element) {
+		return element.isDisplayed();
+	}
+
+	public static String emailInput(String email) {
 		String text = driver.findElement(By.xpath(email)).getText();
 		return text;
 	}
@@ -66,11 +74,16 @@ public abstract class Keyword {
 	}
 
 	public static void sendKeys(WebElement element, String text, Keys enter) {
+
 		element.sendKeys(text, enter);
+
+		element.sendKeys(text, Keys.ENTER);
+
 
 	}
 
 	public static void scrollwindow(WebElement element) {
+
 		js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView(true);", element);
 	}
@@ -79,6 +92,9 @@ public abstract class Keyword {
 		js.executeScript("arguments[0].click();", element);
 
 	}
+
+
+
 
 	public static void handleDropDown(WebElement element) {
 		Select select = new Select(element);
@@ -95,7 +111,9 @@ public abstract class Keyword {
 		return expectedCount;
 	}
 
+
 	public static WebElement getElementFromList(List<WebElement> elements, String textToCompare) {
+
 		for (WebElement i : elements) {
 			String listCurrentelement = i.getText();
 			if (listCurrentelement.contains(textToCompare)) {
@@ -110,6 +128,7 @@ public abstract class Keyword {
 		element.clear();
 	}
 
+
 	public static void refreshPage() {
 		driver.navigate().refresh();
 
@@ -123,6 +142,22 @@ public abstract class Keyword {
 	public static void moveToElement(WebElement element) {
 		Actions act = new Actions(driver);
 		act.moveToElement(element);
+	}
+
+	public static String getCurrentUrl() {
+		return driver.getCurrentUrl();
+
+	}
+	public static String getTitle() {
+		return driver.getTitle();
+	}
+	public static void pasteTextUsingActions(WebElement element,String text) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+	    js.executeScript("arguments[0].value = arguments[1];", element, text);
+		
+	}
+	public static void pressKey(WebElement element) {
+		element.sendKeys(Keys.ENTER);
 
 	}
 

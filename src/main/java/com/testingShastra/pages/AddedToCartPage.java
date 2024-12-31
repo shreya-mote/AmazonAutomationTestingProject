@@ -13,58 +13,64 @@ public class AddedToCartPage {
 		PageFactory.initElements(Keyword.driver, this);
 	}
 
-	
-
 	@FindBy(xpath = "//h1[@class='a-size-medium-plus a-color-base sw-atc-text a-text-bold']")
 	private static WebElement messageofProductadded;
 	@FindBy(xpath = "//select[@id=\"native_dropdown_selected_size_name\"]")
 	private static WebElement sizeDropDown;
-	
-	@FindBy(xpath="//a[@href=\"/cart?ref_=sw_gtc\"]")
+
+	@FindBy(xpath = "//a[@href=\"/cart?ref_=sw_gtc\"]")
 	private static WebElement goToCartBttn;
-	
-	@FindBy(css="span[data-a-selector=\"value\"]")
+
+	@FindBy(css = "span[data-a-selector=\"value\"]")
 	private static WebElement getOnePrdctQty;
-	
-	
-	
-	@FindBy(css="span[data-a-selector=\"value\"]")
+
+	@FindBy(css = "span[data-a-selector=\"value\"]")
 	private static WebElement afterAddingPrdct;
-	
-	@FindBy(css="span#sc-subtotal-label-activecart")
+
+	@FindBy(css = "span#sc-subtotal-label-activecart")
 	private static WebElement itemSubtotal;
 
+	@FindBy(css = "input#add-to-cart-button")
+	private static WebElement addToCartButton;
+	
 	public static void selectSize() {
 		Keyword.scrollwindow(sizeDropDown);
 		Keyword.handleDropDown(sizeDropDown);
 	}
-	
-	public  boolean displayIsItemAddedToCart() {
+
+	public boolean displayIsItemAddedToCart() {
 		waitsFor.visiblityOfElement(messageofProductadded);
 		return Keyword.isMessageDisplayed(messageofProductadded);
 
 	}
-	
-	public  void clickOnGotoCartBttn() {
-		waitsFor.visiblityOfElement(goToCartBttn);
-		Keyword.clickOn(goToCartBttn);
+
+	public static void clickOnAddToCartButton() {
+		waitsFor.visiblityOfElement(addToCartButton);
+		Keyword.scrollwindow(addToCartButton);
+
 	}
-	public  int getQtyOfProductBefore() {
-		String singlePrdctQty= Keyword.getText(getOnePrdctQty);
+
+	public int getQtyOfProductBefore() {
+		String singlePrdctQty = Keyword.getText(getOnePrdctQty);
 		return Keyword.getIntValueFromStringFormat(singlePrdctQty);
 	}
-	
-	
-	public  int QtyOfPrdctAfterAction() {
+
+	public int QtyOfPrdctAfterAction() {
 		waitsFor.visiblityOfElement(afterAddingPrdct);
-		String incrseqtyPrdct= Keyword.getText(afterAddingPrdct);
+		String incrseqtyPrdct = Keyword.getText(afterAddingPrdct);
 		return Keyword.getIntValueFromStringFormat(incrseqtyPrdct);
 	}
+
 	public int getQntyofSubtotal() {
 		waitsFor.visiblityOfElement(itemSubtotal);
-		String subtotalQtyPrdct= Keyword.getText(itemSubtotal);
+		String subtotalQtyPrdct = Keyword.getText(itemSubtotal);
 		return Keyword.getIntValueFromStringFormat(subtotalQtyPrdct);
 	}
 	
-	
+	public void clickOnGotoCartBttn() {
+		waitsFor.visiblityOfElement(goToCartBttn);
+		Keyword.clickOn(goToCartBttn);
+
+	}
+
 }
