@@ -1,6 +1,8 @@
 package com.testingShastra.Base;
 
 import java.awt.Desktop.Action;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,6 +19,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import Exception.InvalidDriverException;
+import net.bytebuddy.dynamic.scaffold.MethodRegistry.Handler.ForAbstractMethod;
 
 public abstract class Keyword {
 	public static RemoteWebDriver driver;
@@ -44,16 +47,14 @@ public abstract class Keyword {
 		element.click();
 	}
 
-
 	public static boolean isMessageDisplayed(WebElement element) {
 		return element.isDisplayed();
 	}
-	
+
 	public static boolean isEnable(WebElement element) {
 		return element.isEnabled();
 	}
 
-	
 	public static boolean isDisplayed(WebElement element) {
 		return element.isDisplayed();
 	}
@@ -77,9 +78,6 @@ public abstract class Keyword {
 
 		element.sendKeys(text, enter);
 
-		element.sendKeys(text, Keys.ENTER);
-
-
 	}
 
 	public static void scrollwindow(WebElement element) {
@@ -92,9 +90,6 @@ public abstract class Keyword {
 		js.executeScript("arguments[0].click();", element);
 
 	}
-
-
-
 
 	public static void handleDropDown(WebElement element) {
 		Select select = new Select(element);
@@ -110,7 +105,6 @@ public abstract class Keyword {
 		}
 		return expectedCount;
 	}
-
 
 	public static WebElement getElementFromList(List<WebElement> elements, String textToCompare) {
 
@@ -128,6 +122,9 @@ public abstract class Keyword {
 		element.clear();
 	}
 
+	public static void cleanTextBox(WebElement element, Keys key) {
+		element.clear();
+	}
 
 	public static void refreshPage() {
 		driver.navigate().refresh();
@@ -138,7 +135,7 @@ public abstract class Keyword {
 		driver.navigate().back();
 
 	}
-	
+
 	public static void moveToElement(WebElement element) {
 		Actions act = new Actions(driver);
 		act.moveToElement(element);
@@ -148,16 +145,37 @@ public abstract class Keyword {
 		return driver.getCurrentUrl();
 
 	}
+
 	public static String getTitle() {
 		return driver.getTitle();
 	}
-	public static void pasteTextUsingActions(WebElement element,String text) {
+
+	public static void pasteTextUsingActions(WebElement element, String text) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-	    js.executeScript("arguments[0].value = arguments[1];", element, text);
-		
+		js.executeScript("arguments[0].value = arguments[1];", element, text);
+
 	}
+
 	public static void pressKey(WebElement element) {
 		element.sendKeys(Keys.ENTER);
+
+	}
+
+	public static List<String> getList(List<WebElement> element) {
+		String price = null;
+		ArrayList<String> list = new ArrayList();
+		for (WebElement priceElement : element) {
+
+			list.add(priceElement.getText());
+		}
+		System.out.println(list);
+		return list;
+
+	}
+
+	public static void dragAndDrop(WebElement element) {
+		Actions act = new Actions(driver);
+		act.clickAndHold(element).moveByOffset(100, 0).release().perform();
 
 	}
 

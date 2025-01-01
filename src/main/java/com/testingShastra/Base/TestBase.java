@@ -16,9 +16,9 @@ public class TestBase  {
 		Keyword.launchUrl(PropertiesFile.getUrl("qa"));
 		Keyword.driver.manage().window().maximize();
 	}
-	@AfterMethod
+/*	@AfterMethod
 	public void tearDown() {
 		Keyword.driver.quit();
-	}
+	}*/
 
 }

@@ -6,8 +6,8 @@
       <class name="com.testingshashtra.runner.FeatureRunner">
         <methods>
           <include name="setUpClass"/>
-          <include name="runScenario" invocation-numbers="32 33 34 3 35 22 23 24 25 30 31"/>
           <include name="tearDownClass"/>
+          <include name="runScenario" invocation-numbers="0"/>
         </methods>
       </class> <!-- com.testingshashtra.runner.FeatureRunner -->
     </classes>
