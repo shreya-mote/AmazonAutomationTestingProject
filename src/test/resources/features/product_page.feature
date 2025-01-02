@@ -31,8 +31,23 @@ Scenario: To verify is customer review field should be present on product page.
 When User search for valid product
 And Click on desire product
 Then Verify is customer review field is display or not
-@today
+
 Scenario: To verify when in search box search any product then that related product will be showd in the page
 When User search for valid product
 Then Verify that the search product page displays products related to the search product
 
+Scenario: To verify when user click on product details should be same as shown in product description.
+When User search for valid product
+And Click on desire product
+Then Verify is product description is same as product details
+@today
+Scenario: To verify the product page should have a out of five rating field of product
+When User search for valid product
+And Click on desire product
+Then Verify is product page have out of five rating field or not
+@today
+Scenario: To verify when user click on back to result link user should navigate to search result page.
+When User search for valid product
+And Click on desire product
+And Click on back to result link
+Then Verify is user redirected to serach result page after clicking back to result link or not

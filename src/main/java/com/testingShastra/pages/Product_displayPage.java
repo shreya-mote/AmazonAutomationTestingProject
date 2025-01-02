@@ -55,8 +55,16 @@ public class Product_displayPage {
 	
 	@FindBy(css="div.a-row>h2")
 	private static WebElement customerReview;
+	
 	@FindBy(css="div.a-section.a-spacing-none.a-spacing-top-small.s-title-instructions-style")
 	private static List<WebElement> listOfNotebookProduct;
+	
+	@FindBy(css= "span[class=\"a-declarative\"] span[class=\"a-size-small a-color-base\"]")
+	private static WebElement productRating;
+	
+	@FindBy(css="a#breadcrumb-back-link")
+	private static WebElement backToResultLink;
+	
 	
 	public void clickOnAddToCart() {
 		waitsFor.visiblityOfElement(addTocartButton);
@@ -153,10 +161,18 @@ public class Product_displayPage {
 		
 		
 	}
-	public String getProductDetails() {
-		waitsFor.visiblityOfElement(classmateNotebookName);
-		return Keyword.getText(classmateNotebookName);
+	public String getRating() {
+		waitsFor.visiblityOfElement(productRating);
+		return Keyword.getText(productRating);
+		
 	}
+	public void clickOnBackToResultLink() {
+		waitsFor.elementToBeClickableMethod(backToResultLink);
+		Keyword.scrollwindow(backToResultLink);
+		Keyword.moveToElement(backToResultLink);
+		Keyword.clickUsingjavaScript(backToResultLink);
+	}
+	
 	
 	
 
